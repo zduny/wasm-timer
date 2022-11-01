@@ -1,11 +1,13 @@
 [package]
 name = "wasm-timer"
-edition = "2018"
+edition = "2021"
 description = "Abstraction over std::time::Instant and futures-timer that works on WASM"
-version = "0.2.5"
-authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
+version = "0.2.6"
+authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>", "zduny <dzduniak@gmail.com>"]
 license = "MIT"
-repository = "https://github.com/tomaka/wasm-timer"
+repository = "https://github.com/zduny/wasm-timer"
+documentation = "https://docs.rs/zduny-wasm-timer/"
+keywords = ["time", "duration", "instant", "wasm"]
 
 [dependencies]
 futures = "0.3.1"
