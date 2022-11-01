@@ -21,9 +21,13 @@
 
 #![cfg(all(target_arch = "wasm32", target_os = "unknown"))]
 
-use std::cmp::{Eq, PartialEq, Ord, PartialOrd, Ordering};
-use std::ops::{Add, Sub, AddAssign, SubAssign};
+use std::cmp::{Eq, Ord, Ordering, PartialEq, PartialOrd};
+use std::ops::{Add, AddAssign, Sub, SubAssign};
 use std::time::Duration;
+
+use js_sys::Reflect;
+use wasm_bindgen::{JsCast, JsValue};
+use web_sys::Performance;
 
 #[derive(Debug, Copy, Clone)]
 pub struct Instant {
@@ -55,10 +59,9 @@ impl Ord for Instant {
 
 impl Instant {
     pub fn now() -> Instant {
-        let val = web_sys::window()
-            .expect("not in a browser")
-            .performance()
+        let val = Reflect::get(&js_sys::global(), &JsValue::from_str("performance"))
             .expect("performance object not available")
+            .unchecked_into::<Performance>()
             .now();
         Instant { inner: val }
     }
@@ -77,7 +80,9 @@ impl Add<Duration> for Instant {
 
     fn add(self, other: Duration) -> Instant {
         let new_val = self.inner + other.as_millis() as f64;
-        Instant { inner: new_val as f64 }
+        Instant {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -86,7 +91,9 @@ impl Sub<Duration> for Instant {
 
     fn sub(self, other: Duration) -> Instant {
         let new_val = self.inner - other.as_millis() as f64;
-        Instant { inner: new_val as f64 }
+        Instant {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -141,7 +148,7 @@ impl SystemTime {
     pub fn duration_since(&self, earlier: SystemTime) -> Result<Duration, ()> {
         let dur_ms = self.inner - earlier.inner;
         if dur_ms < 0.0 {
-            return Err(())
+            return Err(());
         }
         Ok(Duration::from_millis(dur_ms as u64))
     }
@@ -164,7 +171,9 @@ impl Add<Duration> for SystemTime {
 
     fn add(self, other: Duration) -> SystemTime {
         let new_val = self.inner + other.as_millis() as f64;
-        SystemTime { inner: new_val as f64 }
+        SystemTime {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -173,7 +182,9 @@ impl Sub<Duration> for SystemTime {
 
     fn sub(self, other: Duration) -> SystemTime {
         let new_val = self.inner - other.as_millis() as f64;
-        SystemTime { inner: new_val as f64 }
+        SystemTime {
+            inner: new_val as f64,
+        }
     }
 }
 
