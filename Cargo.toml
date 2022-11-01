@@ -2,7 +2,7 @@
 name = "zduny-wasm-timer"
 edition = "2021"
 description = "Abstraction over std::time::Instant and futures-timer that works on WASM"
-version = "0.2.6"
+version = "0.2.7"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>", "zduny <dzduniak@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/zduny/wasm-timer"
