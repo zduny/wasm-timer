@@ -108,6 +108,14 @@ pub const UNIX_EPOCH: SystemTime = SystemTime { inner: 0.0 };
 #[derive(Debug)]
 pub struct Error {}
 
+impl std::fmt::Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "duration was negative")
+    }
+}
+
+impl std::error::Error for Error {}
+
 #[derive(Debug, Copy, Clone)]
 pub struct SystemTime {
     /// Unit is milliseconds.
