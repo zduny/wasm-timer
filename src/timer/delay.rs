@@ -170,7 +170,7 @@ impl Future for Delay {
             return Poll::Ready(Ok(()));
         }
 
-        state.waker.register(&cx.waker());
+        state.waker.register(cx.waker());
 
         // Now that we've registered, do the full check of our own internal
         // state. If we've fired the first bit is set, and if we've been

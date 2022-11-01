@@ -66,7 +66,7 @@ fn schedule_callback(timer: Arc<Mutex<Timer>>, when: Duration) {
     if let Some(window) = web_sys::window() {
         let _ = window
             .set_timeout_with_callback_and_timeout_and_arguments_0(
-                &callback.unchecked_ref(),
+                callback.unchecked_ref(),
                 i32::try_from(when.as_millis()).unwrap_or(0),
             )
             .unwrap();
@@ -75,7 +75,7 @@ fn schedule_callback(timer: Arc<Mutex<Timer>>, when: Duration) {
             .dyn_into::<WorkerGlobalScope>()
             .expect("no supported global object available")
             .set_timeout_with_callback_and_timeout_and_arguments_0(
-                &callback.unchecked_ref(),
+                callback.unchecked_ref(),
                 i32::try_from(when.as_millis()).unwrap_or(0),
             )
             .unwrap();

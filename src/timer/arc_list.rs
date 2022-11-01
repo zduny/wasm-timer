@@ -96,7 +96,7 @@ impl<T> ArcList<T> {
 
 impl<T> Drop for ArcList<T> {
     fn drop(&mut self) {
-        while let Some(_) = self.pop() {
+        while self.pop().is_some() {
             // ...
         }
     }
@@ -113,7 +113,7 @@ impl<T> Node<T> {
         Node {
             next: AtomicUsize::new(0),
             enqueued: AtomicBool::new(false),
-            data: data,
+            data,
         }
     }
 }

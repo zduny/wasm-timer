@@ -80,9 +80,7 @@ impl Add<Duration> for Instant {
 
     fn add(self, other: Duration) -> Instant {
         let new_val = self.inner + other.as_millis() as f64;
-        Instant {
-            inner: new_val as f64,
-        }
+        Instant { inner: new_val }
     }
 }
 
@@ -91,9 +89,7 @@ impl Sub<Duration> for Instant {
 
     fn sub(self, other: Duration) -> Instant {
         let new_val = self.inner - other.as_millis() as f64;
-        Instant {
-            inner: new_val as f64,
-        }
+        Instant { inner: new_val }
     }
 }
 
@@ -108,6 +104,9 @@ impl Sub<Instant> for Instant {
 }
 
 pub const UNIX_EPOCH: SystemTime = SystemTime { inner: 0.0 };
+
+#[derive(Debug)]
+pub struct Error {}
 
 #[derive(Debug, Copy, Clone)]
 pub struct SystemTime {
@@ -145,15 +144,15 @@ impl SystemTime {
         SystemTime { inner: val }
     }
 
-    pub fn duration_since(&self, earlier: SystemTime) -> Result<Duration, ()> {
+    pub fn duration_since(&self, earlier: SystemTime) -> Result<Duration, Error> {
         let dur_ms = self.inner - earlier.inner;
         if dur_ms < 0.0 {
-            return Err(());
+            return Err(Error {});
         }
         Ok(Duration::from_millis(dur_ms as u64))
     }
 
-    pub fn elapsed(&self) -> Result<Duration, ()> {
+    pub fn elapsed(&self) -> Result<Duration, Error> {
         self.duration_since(SystemTime::now())
     }
 
@@ -171,9 +170,7 @@ impl Add<Duration> for SystemTime {
 
     fn add(self, other: Duration) -> SystemTime {
         let new_val = self.inner + other.as_millis() as f64;
-        SystemTime {
-            inner: new_val as f64,
-        }
+        SystemTime { inner: new_val }
     }
 }
 
@@ -182,9 +179,7 @@ impl Sub<Duration> for SystemTime {
 
     fn sub(self, other: Duration) -> SystemTime {
         let new_val = self.inner - other.as_millis() as f64;
-        SystemTime {
-            inner: new_val as f64,
-        }
+        SystemTime { inner: new_val }
     }
 }
 
