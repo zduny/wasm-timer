@@ -191,7 +191,7 @@ impl<T: Ord> Heap<T> {
             }
         }
 
-        for (i, &(ref item, _)) in self.items.iter().enumerate() {
+        for (i, (item, _)) in self.items.iter().enumerate() {
             if i > 0 {
                 assert!(*item >= self.items[(i - 1) / 2].0, "bad at index: {i}");
             }
