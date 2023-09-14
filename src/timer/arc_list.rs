@@ -128,9 +128,11 @@ impl<T> Deref for Node<T> {
 
 #[cfg(test)]
 mod tests {
+    use wasm_bindgen_test::wasm_bindgen_test;
+
     use super::*;
 
-    #[test]
+    #[wasm_bindgen_test]
     fn smoke() {
         let a = ArcList::new();
         let n = Arc::new(Node::new(1));
@@ -141,7 +143,7 @@ mod tests {
         assert!(l.pop().is_none());
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn seal() {
         let a = ArcList::new();
         let n = Arc::new(Node::new(1));

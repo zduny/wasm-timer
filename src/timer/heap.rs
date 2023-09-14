@@ -214,9 +214,11 @@ fn set_index<T>(slab: &mut [SlabSlot<T>], slab_slot: usize, val: T) {
 
 #[cfg(test)]
 mod tests {
+    use wasm_bindgen_test::wasm_bindgen_test;
+
     use super::Heap;
 
-    #[test]
+    #[wasm_bindgen_test]
     fn simple() {
         let mut h = Heap::new();
         h.push(1);
@@ -231,7 +233,7 @@ mod tests {
         assert_eq!(h.pop(), None);
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn simple2() {
         let mut h = Heap::new();
         h.push(5);
@@ -252,7 +254,7 @@ mod tests {
         assert_eq!(h.pop(), Some(8));
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn remove() {
         let mut h = Heap::new();
         h.push(5);
@@ -275,7 +277,7 @@ mod tests {
         return h;
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn test_peek_and_pop() {
         let data = vec![2, 4, 6, 2, 1, 8, 10, 3, 5, 7, 0, 9, 1];
         let mut sorted = data.clone();
@@ -287,7 +289,7 @@ mod tests {
         }
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn test_push() {
         let mut heap = Heap::new();
         heap.push(-2);
@@ -319,7 +321,7 @@ mod tests {
         assert_eq!(v, data);
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn test_to_vec() {
         check_to_vec(vec![]);
         check_to_vec(vec![5]);
@@ -336,13 +338,13 @@ mod tests {
         check_to_vec(vec![5, 4, 3, 2, 1, 5, 4, 3, 2, 1, 5, 4, 3, 2, 1]);
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn test_empty_pop() {
         let mut heap = Heap::<i32>::new();
         assert!(heap.pop().is_none());
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn test_empty_peek() {
         let empty = Heap::<i32>::new();
         assert!(empty.peek().is_none());

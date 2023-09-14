@@ -109,8 +109,12 @@ fn next_interval(prev: Instant, now: Instant, interval: Duration) -> Instant {
 
 #[cfg(test)]
 mod test {
+    use std::time::Duration;
+
+    use wasm_bindgen_test::wasm_bindgen_test;
+
     use super::next_interval;
-    use std::time::{Duration, Instant};
+    use crate::Instant;
 
     struct Timeline(Instant);
 
@@ -142,7 +146,7 @@ mod test {
         }
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn norm_next() {
         let tm = Timeline::new();
         assert!(almost_eq(
@@ -159,7 +163,7 @@ mod test {
         ));
     }
 
-    #[test]
+    #[wasm_bindgen_test]
     fn fast_forward() {
         let tm = Timeline::new();
         assert!(almost_eq(
@@ -179,7 +183,7 @@ mod test {
     /// TODO: this test actually should be successful, but since we can't
     ///       multiply Duration on anything larger than u32 easily we decided
     ///       to allow it to fail for now
-    #[test]
+    #[wasm_bindgen_test]
     #[should_panic(expected = "can't skip more than 4 billion intervals")]
     fn large_skip() {
         let tm = Timeline::new();
