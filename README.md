@@ -1,5 +1,9 @@
 # zduny-wasm-timer
 
+[![Test Status](https://github.com/zduny/wasm-timer/actions/workflows/rust.yml/badge.svg)](https://github.com/zduny/wasm-timer/actions)
+[![Crate](https://img.shields.io/crates/v/zduny-wasm-timer.svg)](https://crates.io/crates/zduny-wasm-timer)
+[![API](https://docs.rs/zduny-wasm-timer/badge.svg)](https://docs.rs/zduny-wasm-timer)
+
 Exports the `Instant`, `Delay`, `Interval` and `Timeout` structs.
 
 On non-WASM targets, this re-exports the types from `tokio-timer`.
