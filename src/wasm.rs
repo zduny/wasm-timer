@@ -47,7 +47,7 @@ impl Eq for Instant {}
 
 impl PartialOrd for Instant {
     fn partial_cmp(&self, other: &Instant) -> Option<Ordering> {
-        self.inner.partial_cmp(&other.inner)
+        Some(self.cmp(other)) 
     }
 }
 
@@ -134,7 +134,7 @@ impl Eq for SystemTime {}
 
 impl PartialOrd for SystemTime {
     fn partial_cmp(&self, other: &SystemTime) -> Option<Ordering> {
-        self.inner.partial_cmp(&other.inner)
+        Some(self.cmp(other))
     }
 }
 
