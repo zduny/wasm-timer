@@ -2,7 +2,7 @@
 name = "zduny-wasm-timer"
 edition = "2021"
 description = "Abstraction over std::time::Instant and futures-timer that works on WASM"
-version = "0.2.8"
+version = "0.2.9"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>", "zduny <dzduniak@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/zduny/wasm-timer"
@@ -10,16 +10,16 @@ documentation = "https://docs.rs/zduny-wasm-timer/"
 keywords = ["time", "duration", "instant", "wasm"]
 
 [dependencies]
-futures = "0.3.28"
-parking_lot = "0.12.1"
-pin-utils = "0.1.0"
+futures = "0.3"
+parking_lot = "0.12"
+pin-utils = "0.1"
 
 [target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
-js-sys = "0.3.64"
-wasm-bindgen = "0.2.87"
-wasm-bindgen-futures = "0.4.37"
-web-sys = { version = "0.3.64", features = ["Window", "WorkerGlobalScope", "Performance"] }
+js-sys = "0.3"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = ["Window", "WorkerGlobalScope", "Performance"] }
 
 [dev-dependencies]
-async-std = "1.12.0"
-wasm-bindgen-test = "0.3.37"
+async-std = "1.13"
+wasm-bindgen-test = "0.3"
